@@ -1,7 +1,7 @@
 """
 Test suite for the CRP API client.
 
-Authored by:
+Authored by and big shout out to:
 https://github.com/robrem/opensecrets-crpapi
 """
 
@@ -36,7 +36,7 @@ class APITest(unittest.TestCase):
     def check_response(self, result, url, parse=''):
         headers = {'User-Agent' : 'Mozilla/5.0'}
         response = self.http.request(url, headers=headers)[1]
-        response = json.loads(response)
+        response = json.loads(response.decode('utf-8'))
 
         if callable(parse):
             response = parse(response)
