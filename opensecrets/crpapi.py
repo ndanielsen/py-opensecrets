@@ -40,7 +40,7 @@ class Client(object):
         headers = {'User-Agent' : 'Mozilla/5.0'}
 
         resp, content = self.http.request(url, headers=headers)
-        content = json.loads(content)
+        content = json.loads(content.decode('utf-8'))
 
         if not resp.get('status') == '200':
             raise CRPError(method, resp, url)
