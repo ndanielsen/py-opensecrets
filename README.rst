@@ -1,3 +1,10 @@
+.. image:: https://travis-ci.org/ndanielsen/py-opensecrets.svg?branch=master
+    :target: https://travis-ci.org/ndanielsen/py-opensecrets
+
+.. image:: https://coveralls.io/repos/github/ndanielsen/py-opensecrets/badge.svg
+:target: https://coveralls.io/github/ndanielsen/py-opensecrets
+
+
 Py-OpenSecrets API
 ===================
 
@@ -63,3 +70,8 @@ All API functions are abstracted to corresponding client methods, and accept the
     >>> summ = crp.fetch('candSummary', cid='N00007360')
     >>> summ['summary']['@attributes']['first_elected']
     '1987'
+
+Contributing
+-----
+
+Please read CONTRIBUTING.md

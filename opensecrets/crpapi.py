@@ -164,7 +164,7 @@ class CRP(Client):
         if apikey is None:
             apikey = os.environ.get('OPENSECRETS_API_KEY')
 
-        if apikey is None:
+        if not apikey:
             raise CRPError("Most Provide An Opensecrets API Key")
 
         super(CRP, self).__init__(apikey, cache)
