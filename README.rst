@@ -8,7 +8,7 @@
 Py-OpenSecrets API
 ===================
 
-An unofficial Python client for the `Center for Responsive Politics API https://www.opensecrets.org/resources/create/apis.php>`_ at OpenSecrets.org.
+An unofficial Python client for the `Center for Responsive Politics API <https://www.opensecrets.org/resources/create/apis.php>`_ at OpenSecrets.org.
 
 Support for python 2.7, 3.4, 3.5, 3.6
 
