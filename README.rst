@@ -2,7 +2,7 @@
     :target: https://travis-ci.org/ndanielsen/py-opensecrets
 
 .. image:: https://coveralls.io/repos/github/ndanielsen/py-opensecrets/badge.svg
-:target: https://coveralls.io/github/ndanielsen/py-opensecrets
+    :target: https://coveralls.io/github/ndanielsen/py-opensecrets
 
 
 Py-OpenSecrets API
