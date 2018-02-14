@@ -63,3 +63,8 @@ All API functions are abstracted to corresponding client methods, and accept the
     >>> summ = crp.fetch('candSummary', cid='N00007360')
     >>> summ['summary']['@attributes']['first_elected']
     '1987'
+
+Contributing
+-----
+
+Please read CONTRIBUTING.md 
