@@ -1,11 +1,22 @@
-OpenSecrets CRP API
+Py-OpenSecrets API
 ===================
 
-A Python client for the `Center for Responsive Politics API <https://www.opensecrets.org/resources/create/apis.php>` at OpenSecrets.org.
+An unofficial Python client for the `Center for Responsive Politics API <https://www.opensecrets.org/resources/create/apis.php>` at OpenSecrets.org.
 
 Access campaign contribution and personal financial data for US congressional members.
 
 You will need a `Center for Responsive Politics API key <https://www.opensecrets.org/api/admin/index.php?function=signup>`.
+
+Forked and built upon from:
+
+https://github.com/robrem/opensecrets-crpapi
+https://github.com/opensecrets/python-crpapi
+
+Goal
+-------
+
+Add higher test coverage and more utilities to enable better and more efficient use
+of the Open Secrets API.
 
 Install
 -------
@@ -13,15 +24,14 @@ Install
 From PyPI:
 
 ::
-
-    pip install opensecrets-crpapi
+    pip install py-opensecrets
 
 
 Or, download and use the install script:
 
 ::
 
-    git clone https://github.com/robrem/opensecrets-crpapi && cd opensecrets-crpapi
+    git clone https://github.com/ndanielsen/py-opensecrets && cd py-opensecrets
     python setup.py install
 
 Usage
@@ -31,7 +41,7 @@ All API functions are abstracted to corresponding client methods, and accept the
 
 ::
 
-    >>> from crpapi import CRP
+    >>> from opensecrets import CRP
     >>> crp = CRP(API_KEY)
 
     # get a specific legislator by CID

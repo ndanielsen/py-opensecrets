@@ -1,4 +1,6 @@
-include crpapi.py
-include test.py
-include requirements.txt
-include README.*
+include *.md
+include *.rst
+include *.txt
+include *.yml
+include *.cfg
+include Makefile

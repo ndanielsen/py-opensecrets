@@ -1,40 +1,57 @@
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+import os
+import re
+import codecs
 
-with open('README.rst') as f:
-    README = f.read()
+from setuptools import setup
+from setuptools import find_packages
 
-VERSION = '0.2.2'
-
-setup(
-    name = 'opensecrets-crpapi',
-    version = VERSION,
-    description = 'A Python client for the Center for Responsive Politics API at OpenSecrets.org.',
-    long_description = README,
-    url = 'https://github.com/robrem/opensecrets-crpapi',
-    author = 'Rob Remington',
-    author_email = 'rob@rob.codes',
-    license = 'MIT',
-    py_modules = ['crpapi'],
-    install_requires = ['httplib2'],
-    platforms = ['any'],
-    classifiers = [
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT License',
-        'Natural Language :: English',
-        'Operating System :: OS Independent',
-        'Programming Language :: Python',
-        'Topic :: Software Development :: Libraries :: Python Modules',
-
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
-    ],
-
-    test_suite='test',
+PROJECT = os.path.abspath(os.path.dirname(__file__))
+REQUIRE_PATH = "requirements.txt"
+EXCLUDES     = (
+    "tests", "bin", "docs", "fixtures", "register", "notebooks", "examples",
 )
+
+long_description = open('README.rst').read()
+
+def read(*parts):
+    """
+    Assume UTF-8 encoding and return the contents of the file located at the
+    absolute path from the REPOSITORY joined with *parts.
+    """
+    with codecs.open(os.path.join(PROJECT, *parts), 'rb', 'utf-8') as f:
+        return f.read()
+
+def get_requires(path=REQUIRE_PATH):
+    """
+    Yields a generator of requirements as defined by the REQUIRE_PATH which
+    should point to a requirements.txt output by `pip freeze`.
+    """
+    for line in read(path).splitlines():
+        line = line.strip()
+        if line and not line.startswith('#'):
+            yield line
+
+setup(name="py-opensecrets",
+      version="0.2.3",
+      description="Libraries for interacting with the Opensecrets API",
+      author="Nathan Danielsen <nathan.danielsen@gmail.com>",
+      author_email = "nathan.danielsen@gmail.com",
+      license="BSD",
+      url="http://github.com/ndanielsen/py-opensecrets/",
+      long_description="Py-opensecrets is a library and set of utilities for interacting with the Opensecrets API",
+      packages=find_packages(where=PROJECT, exclude=EXCLUDES),
+      platforms=["any"],
+      classifiers=["Development Status :: 3 - Alpha",
+                   "Intended Audience :: Developers",
+                   "License :: OSI Approved :: BSD License",
+                   "Natural Language :: English",
+                   "Operating System :: OS Independent",
+                   "Programming Language :: Python",
+                   "Topic :: Software Development :: Libraries :: Python Modules",
+                   'Programming Language :: Python',
+                   "Programming Language :: Python :: 2.7",
+                   "Programming Language :: Python :: 3.4",
+                   "Programming Language :: Python :: 3.5"
+                   ],
+      install_requires=list(get_requires()),
+      )

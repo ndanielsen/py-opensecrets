@@ -1,5 +1,8 @@
 """
 Test suite for the CRP API client.
+
+Authored by:
+https://github.com/robrem/opensecrets-crpapi
 """
 
 import json
@@ -7,15 +10,15 @@ import os
 import unittest
 import httplib2
 
-from crpapi import CRP
+from opensecrets import CRP
 
-API_KEY = os.environ['OPENSECRETS_API_KEY']
+API_KEY = os.environ.get('OPENSECRETS_API_KEY')
 
 def close_connections(http):
     for k, conn in http.connections.items():
         conn.close()
 
-
+@unittest.skipIf(not API_KEY, 'No api key found')
 class APITest(unittest.TestCase):
     """
     Handles comparison of the test response to the response from a direct
@@ -40,7 +43,7 @@ class APITest(unittest.TestCase):
 
         self.assertEqual(result, response)
 
-
+@unittest.skipIf(not API_KEY, 'No api key found')
 class CandidatesTest(APITest):
     """
     Tests all Candidates methods.
@@ -102,7 +105,7 @@ class CandidatesTest(APITest):
 
         self.check_response(sector, url, lambda r: r['response']['sectors']['sector'])
 
-
+@unittest.skipIf(not API_KEY, 'No api key found')
 class CommitteesTest(APITest):
     """
     Tests all Committees methods.
@@ -116,7 +119,7 @@ class CommitteesTest(APITest):
 
         self.check_response(cmte, url, lambda r: r['response']['committee']['member'])
 
-
+@unittest.skipIf(not API_KEY, 'No api key found')
 class OrganizationsTest(APITest):
     """
     Tests all Organizations methods.
@@ -138,7 +141,7 @@ class OrganizationsTest(APITest):
 
         self.check_response(summ, url, lambda r: r['response']['organization']['@attributes'])
 
-
+@unittest.skipIf(not API_KEY, 'No api key found')
 class IndependentExpendituresTest(APITest):
     """
     Tests all Independent Expenditures methods.
@@ -151,7 +154,3 @@ class IndependentExpendituresTest(APITest):
             .format(API_KEY)
 
         self.check_response(exp, url, lambda r: r['response']['indexp'])
-
-
-if __name__ == '__main__':
-    unittest.main()

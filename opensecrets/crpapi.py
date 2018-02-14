@@ -14,14 +14,7 @@ try:
 except ImportError:
     import urllib as urllib
 
-
-class CRPError(Exception):
-    """ Exception for general CRP Client errors. """
-    def __init__(self, message, response=None, url=None):
-        super(CRPError, self).__init__(message)
-        self.message = message
-        self.response = response
-        self.url = url
+from .exceptions import CRPError
 
 
 class Client(object):
@@ -170,6 +163,9 @@ class CRP(Client):
 
         if apikey is None:
             apikey = os.environ.get('OPENSECRETS_API_KEY')
+
+        if apikey is None:
+            raise CRPError("Most Provide An Opensecrets API Key")
 
         super(CRP, self).__init__(apikey, cache)
         self.candidates = CandidatesClient(self.apikey, cache)
