@@ -32,7 +32,7 @@ def get_requires(path=REQUIRE_PATH):
             yield line
 
 setup(name="py-opensecrets",
-      version="0.2.4",
+      version="0.3.0",
       description="Libraries for interacting with the Opensecrets API",
       author="Nathan Danielsen <nathan.danielsen@gmail.com>",
       author_email = "nathan.danielsen@gmail.com",

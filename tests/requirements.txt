@@ -1,3 +1,6 @@
+# Add Dependencies
+requests>=2.7.0
+
 # Testing Requirements
 pytest>=3.2.3
 pytest_cov>=2.5.1
