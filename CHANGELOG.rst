@@ -1,6 +1,9 @@
 py-opensecrets changelog
 ==========================
 
+0.3.1
+    * Fix requirements
+
 0.3.0
 -----
     * Use python requests instead of httplib2 by @ndanielsen
