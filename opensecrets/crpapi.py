@@ -7,7 +7,8 @@ API docs: https://www.opensecrets.org/resources/create/api_doc.php
 
 import json
 import os
-import httplib2
+
+import requests
 
 try:
     import urllib.parse as urllib
@@ -24,29 +25,22 @@ class Client(object):
 
     """
 
-    BASE_URI = \
-            'https://www.opensecrets.org/api/?method={method}&output=json&apikey={apikey}&{params}'
-
-    def __init__(self, apikey=None, cache='.cache'):
-
+    def __init__(self, apikey=None):
         self.apikey = apikey
-        self.http = httplib2.Http(cache)
 
-    def fetch(self, method, **kwargs):
-        """ Make the API request. """
+    def _set_payload(self, method, params):
+        params = params.copy()
+        params.update({'apikey': self.apikey, "output":"json", "method": method})
+        return params
 
-        params = urllib.urlencode(kwargs)
-        url = self.BASE_URI.format(method=method, apikey=self.apikey, params=params)
-        headers = {'User-Agent' : 'Mozilla/5.0'}
-
-        resp, content = self.http.request(url, headers=headers)
-        content = json.loads(content.decode('utf-8'))
-
-        if not resp.get('status') == '200':
-            raise CRPError(method, resp, url)
-
-        return content['response']
-
+    def fetch(self, method, **params):
+        request_str = "https://www.opensecrets.org/api/"
+        payload = self._set_payload(method, params)
+        response = requests.get(request_str, params=payload)
+        if response.status_code == 200:
+            return response.json()['response']
+        else:
+            raise CRPError(method, response, response.url)
 
 class CandidatesClient(Client):
     """
@@ -159,7 +153,7 @@ class CRP(Client):
     when creating a new instance, or included as an environment variable.
     """
 
-    def __init__(self, apikey=None, cache='.cache'):
+    def __init__(self, apikey=None):
 
         if apikey is None:
             apikey = os.environ.get('OPENSECRETS_API_KEY')
@@ -167,8 +161,8 @@ class CRP(Client):
         if not apikey:
             raise CRPError("Most Provide An Opensecrets API Key")
 
-        super(CRP, self).__init__(apikey, cache)
-        self.candidates = CandidatesClient(self.apikey, cache)
-        self.committees = CommitteesClient(self.apikey, cache)
-        self.orgs = OrganizationsClient(self.apikey, cache)
-        self.indexp = IndependentExpendituresClient(self.apikey, cache)
+        super(CRP, self).__init__(apikey)
+        self.candidates = CandidatesClient(self.apikey)
+        self.committees = CommitteesClient(self.apikey)
+        self.orgs = OrganizationsClient(self.apikey)
+        self.indexp = IndependentExpendituresClient(self.apikey)
