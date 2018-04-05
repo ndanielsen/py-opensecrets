@@ -8,17 +8,18 @@
 Py-OpenSecrets API
 ===================
 
-An unofficial Python client for the `Center for Responsive Politics API <https://www.opensecrets.org/resources/create/apis.php>` at OpenSecrets.org.
+An unofficial Python client for the `Center for Responsive Politics API <https://www.opensecrets.org/resources/create/apis.php>`_ at OpenSecrets.org.
 
 Support for python 2.7, 3.4, 3.5, 3.6
 
 Access campaign contribution and personal financial data for US congressional members.
 
-You will need a `Center for Responsive Politics API key <https://www.opensecrets.org/api/admin/index.php?function=signup>`.
+You will need a `Center for Responsive Politics API key <https://www.opensecrets.org/api/admin/index.php?function=signup>`_.
 
 Forked and built upon from:
 
 https://github.com/robrem/opensecrets-crpapi
+
 https://github.com/opensecrets/python-crpapi
 
 Goal
